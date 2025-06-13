@@ -21,18 +21,14 @@ def train_cliff_walking():
     )
     
     # Train the agent
-    save_dir = "saved_models"
+    save_dir = "exports"
     os.makedirs(save_dir, exist_ok=True)
     
     rewards = agent.train(
         episodes=1000,
         log_freq=10,
-        save_freq=200,
-        save_path=save_dir
+        save_path=save_dir # Save path for the trained model
     )
-    
-    # Save final model
-    agent.save(f"{save_dir}/dqn_cliff_final.pt")
     
     # Plot learning curve
     plt.figure(figsize=(15, 6))
@@ -52,7 +48,7 @@ def train_cliff_walking():
     plt.xlabel('Episode')
     plt.ylabel('Average Reward')
     plt.grid(True)
-    plt.savefig(f"{save_dir}/learning_curve.png")
+    plt.savefig(f"{save_dir}/learning_curve.pdf")
     plt.close()
     
     print(f"Training completed. Model saved to {save_dir}/dqn_cliff_final.pt")
