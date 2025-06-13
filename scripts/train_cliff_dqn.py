@@ -48,7 +48,7 @@ def train_cliff_walking():
     plt.xlabel('Episode')
     plt.ylabel('Average Reward')
     plt.grid(True)
-    plt.savefig(f"{save_dir}/learning_curve.pdf")
+    plt.savefig(f"{save_dir}/learning_curve.svg")
     plt.close()
     
     print(f"Training completed. Model saved to {save_dir}/dqn_cliff_final.pt")
