@@ -35,26 +35,24 @@ def train_cliff_walking():
     agent.save(f"{save_dir}/dqn_cliff_final.pt")
     
     # Plot learning curve
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(15, 6))
+    plt.subplot(2, 1, 1)
     plt.plot(rewards)
     plt.title('DQN Learning Curve on CliffWalking')
     plt.xlabel('Episode')
     plt.ylabel('Total Reward')
     plt.grid(True)
-    plt.savefig(f"{save_dir}/learning_curve.png")
-    plt.close()
     
+    plt.subplot(2, 1, 2)
     # Compute and plot moving average
     window_size = 50
     moving_avg = np.convolve(rewards, np.ones(window_size)/window_size, mode='valid')
-    
-    plt.figure(figsize=(10, 6))
     plt.plot(moving_avg)
     plt.title(f'DQN Learning Curve (Moving Average, Window={window_size})')
     plt.xlabel('Episode')
     plt.ylabel('Average Reward')
     plt.grid(True)
-    plt.savefig(f"{save_dir}/learning_curve_avg.png")
+    plt.savefig(f"{save_dir}/learning_curve.png")
     plt.close()
     
     print(f"Training completed. Model saved to {save_dir}/dqn_cliff_final.pt")
