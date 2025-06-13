@@ -19,7 +19,7 @@ def main():
     agent.train(episodes=1000)
     
     # Save the trained agent
-    agent.save("dqn_agent.pt")
+    agent.save("dqn_agent.pth")
 
 if __name__ == "__main__":
     main()

@@ -105,7 +105,7 @@ def main():
     
     # Check if there's a saved model and load it
     save_dir = "exports"
-    model_path = f"{save_dir}/dqn_agent_final.pt"
+    model_path = f"{save_dir}/dqn_agent_final.pth"
     
     if os.path.exists(model_path):
         print(f"Loading trained model from {model_path}")

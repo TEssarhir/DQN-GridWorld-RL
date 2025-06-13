@@ -51,7 +51,7 @@ def train_cliff_walking():
     plt.savefig(f"{save_dir}/learning_curve.svg")
     plt.close()
     
-    print(f"Training completed. Model saved to {save_dir}/dqn_cliff_final.pt")
+    print(f"Training completed. Model saved to {save_dir}/dqn_cliff_final.pth")
 
 if __name__ == "__main__":
     train_cliff_walking()

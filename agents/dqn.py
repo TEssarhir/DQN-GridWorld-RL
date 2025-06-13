@@ -135,12 +135,12 @@ class DQNAgent(Agent):
                     print(f"Episode {ep}, Average Reward: {avg_reward:.2f}, Epsilon: {self.epsilon:.3f}")
                 
             if save_path :
-                self.save(f"{save_path}/dqn_agent_final.pt")
+                self.save(f"{save_path}/dqn_agent_final.pth")
             
         except KeyboardInterrupt:
             print(f"Training interrupted. Saving current model at episode{ep}...")
             if save_path:
-                self.save(f"{save_path}/dqn_agent_ep{ep}.pt")
+                self.save(f"{save_path}/dqn_agent_ep{ep}.pth")
         
         return total_rewards
     
@@ -149,18 +149,10 @@ class DQNAgent(Agent):
         directory = os.path.dirname(path)
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
-            
-        torch.save({
-            'q_net_state_dict': self.q_net.state_dict(),
-            'target_q_net_state_dict': self.target_q_net.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'epsilon': self.epsilon
-        }, path)
+
+        torch.save(self.q_net.state_dict(), path)
     
     def load(self, path: str):
         """Load the agent from a file"""
-        checkpoint = torch.load(path)
-        self.q_net.load_state_dict(checkpoint['q_net_state_dict'])
-        self.target_q_net.load_state_dict(checkpoint['target_q_net_state_dict'])
-        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        self.epsilon = checkpoint['epsilon']
+        self.q_net.load_state_dict(torch.load(path))
+        self.target_q_net.load_state_dict(self.q_net.state_dict())
