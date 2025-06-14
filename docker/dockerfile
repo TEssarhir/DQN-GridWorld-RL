@@ -8,8 +8,5 @@ COPY src/requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the source code
-COPY src/ .
-
 # Python entry point
 ENTRYPOINT ["python"]
