@@ -1,4 +1,4 @@
-FROM python:3.13.4
+FROM python:3.13.5
 
 WORKDIR /app
 
@@ -9,12 +9,7 @@ COPY src/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the source code
-COPY src/ ./src/
+COPY src/ .
 
-# Set the working directory to the src folder
-WORKDIR /app/src
-
-# Command to run when container starts
-# Default to running the main training script
+# Python entry point
 ENTRYPOINT ["python"]
-CMD ["main.py"]
