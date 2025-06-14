@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  train:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./exports:/app/exports
+    command: src/scripts/train_cliff_dqn.py
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "6006:6006"  # In case you we need to add TensorBoard
+
+  visualize:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./exports:/app/exports
+    command: src/scripts/visualize_agent.py
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8888:8888"  # For displaying visualizations
+
+  dev:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./exports:/app/exports
+    command: bash  # For shell interaction
+    environment:
+      - PYTHONPATH=/app
+    stdin_open: true
+    tty: true
+    ports:
+      - "8888:8888"  # For Jupyter
+      - "6006:6006"  # For TensorBoard
